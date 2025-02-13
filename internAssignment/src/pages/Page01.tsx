@@ -4,17 +4,25 @@ import { IoClose } from "react-icons/io5"; // Close icon
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-
+import {uploadImageToCloudinary} from "../utils/cloudinaryService";
+import { useInventory } from "../context/InventoryContext";
 interface AddEquipmentFormProps {
   onClose: () => void;
+  equipmentId: number; 
 }
-const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose }) => {
+const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose, equipmentId }) => {
+  const { equipment, updateQuantity } = useInventory();
+  const item = equipment.find((eq) => eq.id === equipmentId) || { id: equipmentId, quantity: 1 };
+
+  
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const [quantity, setQuantity] = useState(1);
+  // const { quantity, setQuantity } = useInventory();
   const [section, setSection] = useState("Sound");
   const [type, setType] = useState("Speakers");
   const [category, setCategory] = useState("");
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [power, setPower] = useState("");
@@ -26,27 +34,27 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose }) => {
     }
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     const newItem = {
-      id: Date.now(),
+      id: equipmentId, // Unique ID
+      quantity,
       section,
       type,
       category,
-      quantity,
       brand,
       model,
       power,
+      assembled,
       image,
     };
     addToCart(newItem);
-    // navigate("/cart");
     onClose();
   };
   return (
     <>
       {/* Dark Overlay Background */}
       <motion.div
-        className="fixed inset-0  bg-opacity-50 backdrop-blur-sm"
+        className="fixed inset-0 z-0  bg-opacity-50 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -116,7 +124,7 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose }) => {
                   </select>
                 </label>
               </div>
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium">
                   Inventory Quantity
                 </label>
@@ -127,7 +135,22 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose }) => {
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
                 />
-              </div>
+              </div> */}
+              <div className="flex items-center space-x-3">
+        <button
+          onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+          className="bg-gray-200 px-3 py-1 rounded"
+        >
+          -
+        </button>
+        <span>{quantity}</span>
+        <button
+          onClick={() => setQuantity((prev) => prev + 1)}
+          className="bg-gray-200 px-3 py-1 rounded"
+        >
+          +
+        </button>
+      </div>
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium">
@@ -208,7 +231,7 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose }) => {
             </div>
             <motion.button
               whileTap={{ scale: 0.95 }}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
+              className="w-full bg-blue-600 text-white py-3 mb-10 rounded-lg shadow-md hover:bg-blue-700 transition"
               onClick={handleAddToCart}
             >
               Save

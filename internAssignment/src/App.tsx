@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Page01 from './pages/Page01'
 import { CartProvider } from './context/CartContext'
-import Cart from './pages/Cart'
+import CartPage from './pages/Cart'
 function App() {
   return (
     <>
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage onClose={() => { /* handle close */ }} />} />
         <Route path="/" element={<Page01 onClose={() => { /* handle close */ }} />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
       </Router>
     </CartProvider>

@@ -3,19 +3,26 @@ import { Navigate, useNavigate } from "react-router-dom";
 import AddEquipmentForm from "./Page01";
 import { motion } from "framer-motion";
 import "../App.css";
+import { useInventory } from "../context/InventoryContext";
 
-const EquipmentItem = ({ 
+const EquipmentItem = ({
+  id,
   name,
-  count, 
+  count,
   setCount,
   onAddClick,
 }: {
+  id: number;
   name: string;
   count: number;
-  setCount: (newCount: number) => void;
+  setCount: (count: number) => void;
   onAddClick: () => void;
- }) => {
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { equipment, updateQuantity } = useInventory();
+  const item = equipment.find((eq) => eq.id === id);
+
+  if (!item) return null;
   return (
     <div className="flex items-center justify-between border-b border-0 border-slate-300 py-4">
       {/* <div className="flex items-center gap-4"> */}
@@ -29,22 +36,22 @@ const EquipmentItem = ({
         >
           + Add
         </button>
-        {isOpen && <AddEquipmentForm onClose={() => setIsOpen(false)} />}
+        {isOpen && (
+          <AddEquipmentForm onClose={() => setIsOpen(false)} equipmentId={1} />
+        )}
       </div>
       <div className="flex items-center gap-2">
-        {/* <div className="flex items-center gap-2 bg-amber-300 rounded-full"> */}
         <button
           className="text-gray-400 text-2xl bg-blend-lighten text-center flex justify-center font-extralight bg-slate-200 rounded-full h-8 w-8"
-          onClick={() => setCount(Math.max(0, count - 1))}
+          onClick={() => updateQuantity(id, Math.max(0, item.quantity - 1))}
+          disabled={item.quantity <= 0}
         >
           -
         </button>
-        {/* </div> */}
-
-        <span>{count}</span>
+        <span>{item.quantity}</span>
         <button
           className="text-gray-400 text-2xl bg-blend-lighten text-center flex justify-center font-extralight bg-slate-200 rounded-full h-8 w-8"
-          onClick={() => setCount(count + 1)}
+          onClick={() => updateQuantity(id, item.quantity + 1)}
         >
           +
         </button>
@@ -55,6 +62,7 @@ const EquipmentItem = ({
 
 const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
   const navigate = useNavigate();
+  const { equipment } = useInventory();
   const [equipmentQuantities, setEquipmentQuantities] = useState<{
     [key: string]: number;
   }>({
@@ -63,9 +71,9 @@ const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
     "Audio Mixer": 0,
     "Fixed Fixture": 0,
   });
-
-  const [isSliderActive, setIsSliderActive] = useState(false);
   const [customItemCount, setCustomItemCount] = useState(0);
+  const [isSliderActive, setIsSliderActive] = useState(false);
+
   const [showFooter, setShowFooter] = useState(true);
   const handleSliderChange = (value: number) => {
     setIsSliderActive(value > 0); // Assume active if value is greater than 0
@@ -95,19 +103,16 @@ const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
             Save & exit
           </button>
         </div>
-
         {/* Heading */}
         <h1 className="text-2xl font-light mt-4">Add equipment</h1>
         <p className="text-gray-600 mt-1">
           Add equipment items in the template for your selected package series.
         </p>
-
         {/* Preview Package Link */}
         <a href="/" className="text-blue-600 mt-4 inline-block hover:underline">
           Preview Package
         </a>
       </div>
-
       {/*  */}
       <div className="max-w-sm mx-3 mb-40 bg-white rounded-2xl shadow-2xl shadow-slate-300  p-4">
         <h2 className="text-xl font-semibold mb-4">Equipment</h2>
@@ -121,45 +126,41 @@ const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
           <div className="font-medium py-1 px-2 rounded-md inline-block mb-2">
             Speaker
           </div>
-          <EquipmentItem 
-            name="Speaker" 
+          <EquipmentItem
+            id={1}
+            name="Speaker"
             count={equipmentQuantities["Speaker"]}
             setCount={(count) => updateQuantity("Speaker", count)}
             onAddClick={() => setShowFooter(false)}
           />
-          {/* <EquipmentItem 
-            name="Speaker" 
-            count={equipmentQuantities["Speaker"]}
-            setCount={(count) => updateQuantity("Speaker", count)}
-          /> */}
         </div>
-
         <div className="mb-4">
           <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
             Microphone
           </div>
           <EquipmentItem
-            name="Microphone"
-            count={equipmentQuantities["Microphone"]}
-            setCount={(count) => updateQuantity("Microphone", count)}
-            onAddClick={() => setShowFooter(false)}
-          />
+              id={2}
+              name="Microphone"
+              count={equipmentQuantities["Microphone"]}
+              setCount={(count) => updateQuantity("Microphone", count)}
+              onAddClick={() => setShowFooter(false)}
+            />
         </div>
-        <div className="mb-4">
-          <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
-            Audio Mixer
-          </div>
-          <EquipmentItem
+      <div className="mb-4">
+        <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
+          Audio Mixer
+        </div>
+        <EquipmentItem
+            id={3}
             name="Audio Mixer"
             count={equipmentQuantities["Audio Mixer"]}
             setCount={(count) => updateQuantity("Audio Mixer", count)}
             onAddClick={() => setShowFooter(false)}
           />
-        </div>
-        <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-block mb-2">
+        <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-block my-4">
           🏗️ Structure
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
             Fixed Fixture
           </div>
@@ -170,34 +171,37 @@ const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
             onAddClick={() => setShowFooter(false)}
 
           />
-        </div>
-        {Object.entries(equipmentQuantities).map(([itemName, quantity]) => (
-          <div key={itemName} className="mb-4">
-            <div className="font-medium py-1 px-2 rounded-md inline-block mb-2">
-              {itemName}
+        </div> */}
+        <div className="mb-4">
+          {Object.entries(equipmentQuantities).map(([itemName, quantity]) => (
+            <div key={itemName} className="mb-4">
+              <EquipmentItem
+                id={Object.keys(equipmentQuantities).indexOf(itemName) + 1}
+                name={itemName}
+                count={quantity}
+                setCount={(count) => updateQuantity(itemName, count)}
+                onAddClick={() => setShowFooter(false)}
+              />
             </div>
-            <EquipmentItem
-              name={itemName}
-              count={quantity}
-              setCount={(count) => updateQuantity(itemName, count)}
-            onAddClick={() => setShowFooter(false)}
-            />
-          </div>
-        ))}
+          ))}
+        </div>
         <div className="justify-center flex align-middle my-4">
-          <button className="w-[60%]  bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-          onClick={handleAddMore}
+          <button
+            className="w-[60%]  bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+            onClick={handleAddMore}
           >
             + Add more
           </button>
         </div>
       </div>
+      </div>
+
       {/* Conditionally render the footer */}
-      {showFooter && (
-        <div 
-        // className=" bottom-0 left-0 w-full border flex justify-between p-4 bg-white border-t border-gray-300 shadow-md"
-        className={`
-          ${isSliderActive ? "" : "fixed bottom-0 left-0 w-full"}
+      {
+        <div
+          // className="fixed bottom-0 left-0 w-full border flex justify-between p-4 bg-white border-t border-gray-300 shadow-md"
+          className={`
+          ${isSliderActive ? "fixed" : " z-10 fixed bottom-0 left-0 w-full"}
           border flex justify-between p-4 bg-white border-t border-gray-300 shadow-md
         `}
         >
@@ -216,7 +220,7 @@ const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
             </button>
           )}
         </div>
-      )}
+      }
     </div>
   );
 };
