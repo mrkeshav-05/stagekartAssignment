@@ -109,7 +109,8 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                 >
-                  <option>Speakers</option>
+                  <option>Small Speakers</option>
+                  <option>Large Speakers</option>
                   <option>Microphone</option>
                   <option>Audio Mixer</option>
                   <option>Fixed Fixture</option>

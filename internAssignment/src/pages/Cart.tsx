@@ -3,7 +3,8 @@ import { IoTrash } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { audio1, image2, image3, micro1, micro3, speaker1, speaker2, speaker3 } from "../assets/images";
-
+import { RiDeleteBinLine } from "react-icons/ri";
+import { CiEdit } from "react-icons/ci";
 const CartPage: React.FC = () => {
   const { cart, removeFromCart } = useCart();
   const navigate = useNavigate();
@@ -53,24 +54,30 @@ const CartPage: React.FC = () => {
           {cart.map((item: { id: number; brand: string; model: string; section: string; type: string; quantity: number; image: File | null}) => (
             <div
               key={item.id}
-              className="flex items-center justify-between p-4 border rounded-lg shadow-sm bg-white"
+              className="flex items-center justify-between p-4  rounded-lg shadow-sm bg-white"
             >
               <img src={RandomImage()} 
               alt="microphone"
-              className="w-16 h-16 object cover rounded-lg"
+              className="w-12 h-16 object cover rounded-lg"
                 />
               <div>
-                <h3 className="font-medium text-lg">{item.brand} {item.model}</h3>
+                <h3 className="font-medium text-lg">{item.brand} <br /> {item.model}</h3>
                 <p className="text-gray-600 text-sm">{item.section} - {item.type}</p>
-                <p className="text-gray-800 font-semibold">Quantity: {item.quantity}</p>
+                <p className="text-gray-800 font-semibold">{item.quantity}</p>
                 {item.image && <p className="text-gray-800 font-semibold">Image: {item.image.name}</p>}
               </div>
               <button
                 onClick={() => removeFromCart(item.id)}
-                className="text-red-600 hover:text-red-800"
+                className="text-blue-500 hover:text-red-800 border rounded-full p-1 "
                 title="Remove item from cart"
               >
-                <IoTrash className="text-2xl" />
+                <RiDeleteBinLine className="font-semibold" />
+              </button>
+              <button
+                className="text-blue-500 hover:text-blue-600 border rounded-full p-1"
+                title="Remove item from cart"
+              >
+                <CiEdit className="font-semibold" />
               </button>
             </div>
           ))}
