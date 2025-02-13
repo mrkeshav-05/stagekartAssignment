@@ -12,7 +12,7 @@ function App() {
       <Router>
       <Routes>
         <Route path="/" element={<HomePage onClose={() => { /* handle close */ }} />} />
-        <Route path="/" element={<Page01 onClose={() => { /* handle close */ }} />} />
+        <Route path="/" element={<Page01 onClose={() => { /* handle close */ }} equipmentId={1} />} />
         <Route path="/cart" element={<CartPage />} />
       </Routes>
       </Router>

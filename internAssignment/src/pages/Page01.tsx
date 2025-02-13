@@ -76,8 +76,8 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
         className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 shadow-lg max-w-md mx-auto max-h-[85vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200"
       >
         {/* Modal Header */}
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Add new equipment</h2>
+        <div className="flex justify-between items-center ">
+          <h2 className="text-xl ">Add new equipment</h2>
           <IoClose
             className="text-2xl cursor-pointer text-gray-600 hover:text-gray-800"
             onClick={onClose}
@@ -85,27 +85,27 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
         </div>
         <hr className="my-2 w-full border border-slate-300" />
         {/* Form Fields */}
-        <div className="max-w-sm mx-auto my-10 bg-white shadow-md rounded-lg">
+        <div className="max-w-sm mx-auto my-10 bg-white shadow-md rounded-lg bg-blend-lighten ">
           <div className="border-1 border-slate-300 rounded-lg p-3">
-            <h3 className="font-semibold text-lg mb-2">
+            <h3 className=" text-lg mb-2">
               Equipment Specifications
             </h3>
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium">Section</label>
+                <label className="block text-sm font-extralight text-slate-700">Section</label>
                 <select
-                  className="w-full border rounded-md p-2"
+                  className="w-full border-1 border-slate-300 rounded-md p-2 text-sm font-extralight text-slate-700"
                   value={section}
                   onChange={(e) => setSection(e.target.value)}
                 >
-                  <option>Sound</option>
+                  <option className="">Sound</option>
                   <option>Structure</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium">Type</label>
+                <label className="block text-sm font-extralight text-slate-700">Type</label>
                 <select
-                  className="w-full border rounded-md p-2"
+                  className="w-full border-1 border-slate-300 rounded-md p-2 text-sm font-extralight text-slate-700"
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                 >
@@ -116,75 +116,88 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-sm font-medium">
-                  Category
-                  <select
-                    className="w-full border rounded-md p-2"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  >
-                    <option>Select</option>
-                  </select>
-                </label>
-              </div>
-              {/* <div>
+            <div className="mb-4 border-1 border-slate-300 rounded-2xl p-4">
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-sm font-extralight text-slate-700 ">
+                    Category
+                    <select
+                      className="w-full border-1 border-slate-300 rounded-md p-2"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      <option>Select</option>
+                    </select>
+                  </label>
+                </div>
+                {/* <div>
                 <label className="block text-sm font-medium">
                   Inventory Quantity
                 </label>
                 <input
                   type="number"
-                  className="w-full border rounded-md p-2"
+                  className="w-full border-1 border-slate-300 rounded-md p-2"
                   placeholder="Enter here"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
                 />
               </div> */}
-              <div className="flex flex-col items-center space-x-3">
-                <label className="block text-sm font-medium">Quantity</label>
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-                    className="bg-gray-200 px-3 py-1 rounded"
-                  >
-                    -
-                  </button>
-                  <span>{quantity}</span>
-                  <button
-                    onClick={() => setQuantity((prev) => prev + 1)}
-                    className="bg-gray-200 px-3 py-1 rounded"
-                  >
-                    +
-                  </button>
+                <div className="flex flex-col items-center space-x-3">
+                  <label className="block text-sm font-extralight text-slate-700">Quantity</label>
+                  <div className="flex items-center space-x-3  rounded-md text-sm font-extralight text-slate-700 ">
+                    <button
+                      onClick={() =>
+                        setQuantity((prev) => Math.max(1, prev - 1))
+                      }
+                      className="bg-gray-200 px-3 py-1 rounded"
+                    >
+                      -
+                    </button>
+                    <span>{quantity}</span>
+                    <button
+                      onClick={() => setQuantity((prev) => prev + 1)}
+                      className="bg-gray-200 px-3 py-1 rounded"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-extralight text-slate-700">
+                  Size (Woofer inches)
+                </label>
+                <select className="w-full border-1 border-slate-300 rounded-md p-2 text-sm font-extralight text-slate-700">
+                  <option>Select</option>
+                </select>
+              </div>
+
+              <div className="flex gap-5  mb-4  ">
+                <div>
+                <input
+                  type="checkbox"
+                  className="w-6 h-6  my-2 block p-4 cursor-pointer"
+                  // checked={assembled}
+                  // onChange={() => setAssembled(!assembled)}
+                  title="Assembled checkbox"
+                />
+                </div>
+                <div className="flex flex-col  ">
+                  <label className="text-sm font-extralight text-slate-700">Assembled</label>
+                  <p className="text-xs text-gray-500 ml-2 block">
+                    Select if this is a Copy Speaker built locally using
+                    cabinets. This helps managing customer expectations and
+                    avoiding complaints.
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium">
-                Size (Woofer inches)
-              </label>
-              <select className="w-full border rounded-md p-2">
-                <option>Select</option>
-              </select>
-            </div>
-
-            <div className="flex items-center mb-4">
-              <input
-                type="checkbox"
-                className="mr-2"
-                // checked={assembled}
-                // onChange={() => setAssembled(!assembled)}
-                title="Assembled checkbox"
-              />
-              <label className="text-sm">Assembled</label>
-            </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium">Brand</label>
+              <label className="block text-sm font-extralight text-slate-700">Brand</label>
               <input
                 type="text"
-                className="w-full border rounded-md p-2"
+                className="w-full border-1 border-slate-300 rounded-md p-2"
                 placeholder="Enter here"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
@@ -192,10 +205,10 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium">Model</label>
+              <label className="block text-sm font-extralight text-slate-700">Model</label>
               <input
                 type="text"
-                className="w-full border rounded-md p-2"
+                className="w-full border-1 border-slate-300 rounded-md p-2"
                 placeholder="Enter here"
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
@@ -203,12 +216,12 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium">
+              <label className="block text-sm font-extralight text-slate-700">
                 Power Watts (RMS)
               </label>
               <input
                 type="text"
-                className="w-full border rounded-md p-2"
+                className="w-full border-1 border-slate-300 rounded-md p-2"
                 placeholder="Enter here"
                 value={power}
                 onChange={(e) => setPower(e.target.value)}
@@ -221,20 +234,20 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
               </label>
               <input
                 type="text"
-                className="w-full border rounded-md p-2"
+                className="w-full border-1 border-slate-300 rounded-md p-2"
                 placeholder="Enter here"
               />
             </div> */}
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium">
+            <div className="mb-4 text-sm font-extralight text-slate-700">
+              <label className="block text-sm font-extralight text-slate-700">
                 Equipment Image
               </label>
-              <div className="border-dashed border-2 border-gray-300 rounded-md p-4 text-center">
+              <div className="border-dashed border-1  border-slate-300 rounded-md p-4 ">
                 <p className="text-sm text-gray-500">Upload From Your Device</p>
                 <input
                   type="file"
-                  className="mt-2"
+                  className="mt-2 text-sm font-extralight text-slate-700"
                   title="Upload equipment image"
                   onChange={handleFileChange}
                 />
