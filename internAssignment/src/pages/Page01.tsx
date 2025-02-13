@@ -4,17 +4,22 @@ import { IoClose } from "react-icons/io5"; // Close icon
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import {uploadImageToCloudinary} from "../utils/cloudinaryService";
+import { uploadImageToCloudinary } from "../utils/cloudinaryService";
 import { useInventory } from "../context/InventoryContext";
 interface AddEquipmentFormProps {
   onClose: () => void;
-  equipmentId: number; 
+  equipmentId: number;
 }
-const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose, equipmentId }) => {
+const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
+  onClose,
+  equipmentId,
+}) => {
   const { equipment, updateQuantity } = useInventory();
-  const item = equipment.find((eq) => eq.id === equipmentId) || { id: equipmentId, quantity: 1 };
+  const item = equipment.find((eq) => eq.id === equipmentId) || {
+    id: equipmentId,
+    quantity: 1,
+  };
 
-  
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
@@ -136,21 +141,24 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose, equipmentI
                   onChange={(e) => setQuantity(Number(e.target.value))}
                 />
               </div> */}
-              <div className="flex items-center space-x-3">
-        <button
-          onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-          className="bg-gray-200 px-3 py-1 rounded"
-        >
-          -
-        </button>
-        <span>{quantity}</span>
-        <button
-          onClick={() => setQuantity((prev) => prev + 1)}
-          className="bg-gray-200 px-3 py-1 rounded"
-        >
-          +
-        </button>
-      </div>
+              <div className="flex flex-col items-center space-x-3">
+                <label className="block text-sm font-medium">Quantity</label>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                    className="bg-gray-200 px-3 py-1 rounded"
+                  >
+                    -
+                  </button>
+                  <span>{quantity}</span>
+                  <button
+                    onClick={() => setQuantity((prev) => prev + 1)}
+                    className="bg-gray-200 px-3 py-1 rounded"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium">
@@ -178,7 +186,8 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose, equipmentI
                 type="text"
                 className="w-full border rounded-md p-2"
                 placeholder="Enter here"
-                value={brand} onChange={(e) => setBrand(e.target.value)}
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
               />
             </div>
 
@@ -188,7 +197,8 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose, equipmentI
                 type="text"
                 className="w-full border rounded-md p-2"
                 placeholder="Enter here"
-                value={model} onChange={(e) => setModel(e.target.value)}
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
               />
             </div>
 
@@ -200,7 +210,8 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({ onClose, equipmentI
                 type="text"
                 className="w-full border rounded-md p-2"
                 placeholder="Enter here"
-                value={power} onChange={(e) => setPower(e.target.value)}
+                value={power}
+                onChange={(e) => setPower(e.target.value)}
               />
             </div>
 
