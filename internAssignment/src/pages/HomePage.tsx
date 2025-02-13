@@ -85,12 +85,12 @@ const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
   };
   return (
     <div>
-      <div className=" p-6  rounded-lg shadow-md w-full max-w-lg">
+      <div className=" p-6  rounded-lg w-full max-w-lg">
         {/* Save & Exit Button */}
         <div className="flex justify-end">
           <button
             className="border border-gray-300 px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100 transition"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/cart")}
           >
             Save & exit
           </button>
@@ -109,7 +109,7 @@ const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
       </div>
 
       {/*  */}
-      <div className="max-w-sm mx-3 mb-40 bg-white rounded-2xl shadow-2xl shadow-black p-4">
+      <div className="max-w-sm mx-3 mb-40 bg-white rounded-2xl shadow-2xl shadow-slate-300  p-4">
         <h2 className="text-xl font-semibold mb-4">Equipment</h2>
         <p className="text-sm text-gray-500 mb-4">
           Equipment items included in this package.
@@ -194,7 +194,13 @@ const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
       </div>
       {/* Conditionally render the footer */}
       {showFooter && (
-        <div className="fixed bottom-0 left-0 w-full border flex justify-between p-4 bg-white border-t border-gray-300 shadow-md">
+        <div 
+        // className=" bottom-0 left-0 w-full border flex justify-between p-4 bg-white border-t border-gray-300 shadow-md"
+        className={`
+          ${isSliderActive ? "" : "fixed bottom-0 left-0 w-full"}
+          border flex justify-between p-4 bg-white border-t border-gray-300 shadow-md
+        `}
+        >
           <button
             className="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition"
             onClick={() => navigate(-1)}

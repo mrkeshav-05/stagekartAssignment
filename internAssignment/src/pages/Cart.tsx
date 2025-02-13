@@ -1,64 +1,3 @@
-// import React from "react";
-// import { useCart } from "../context/CartContext";
-// import { useNavigate } from "react-router-dom";
-
-// const Cart: React.FC = () => {
-//   const { cart, removeFromCart } = useCart();
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className="p-6 bg-gray-100 rounded-lg shadow-lg max-w-lg mx-auto">
-//       <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
-
-//       {cart.length === 0 ? (
-//         <p className="text-gray-500">Your cart is empty.</p>
-//       ) : (
-//         <ul>
-//           {cart.map((item) => (
-//             <li key={item.id} className="flex justify-between items-center mb-4 p-4 bg-white shadow rounded-lg">
-//               <div>
-//                 <h3 className="font-semibold">{item.name}</h3>
-//                 <p>${item.price.toFixed(2)}</p>
-//               </div>
-//               <div className="flex items-center">
-//                 <button
-//                   className="px-3 py-1 bg-gray-300 rounded-md"
-//                   onClick={() => updateQuantity(item.id, item.quantity - 1)}
-//                 >
-//                   -
-//                 </button>
-//                 <span className="mx-3">{item.quantity}</span>
-//                 <button
-//                   className="px-3 py-1 bg-gray-300 rounded-md"
-//                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
-//                 >
-//                   +
-//                 </button>
-//                 <button
-//                   className="ml-4 px-3 py-1 bg-red-500 text-white rounded-md"
-//                   onClick={() => removeFromCart(item.id)}
-//                 >
-//                   Remove
-//                 </button>
-//               </div>
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-
-//       {cart.length > 0 && (
-//         <div className="mt-4">
-//           <h3 className="text-lg font-semibold">Total: ${getTotalPrice().toFixed(2)}</h3>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Cart;
-
-
-
 import React from "react";
 import { IoTrash } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
@@ -99,11 +38,27 @@ const CartPage: React.FC = () => {
 
       <button
         className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
-        onClick={() => navigate("/checkout")}
+        onClick={() => navigate("/cart")}
         disabled={cart.length === 0}
       >
         Proceed to Checkout
       </button>
+        <div 
+        className="fixed bottom-0 left-0 w-full border flex justify-between p-4 bg-white border-t border-gray-300 shadow-md"
+        >
+          <button
+            className="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition"
+            onClick={() => navigate(-1)}
+          >
+            Back
+          </button>
+            {/* <button
+              className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
+              onClick={() => navigate("/cart")}
+            >
+              Next
+            </button> */}
+        </div>
     </div>
   );
 };
