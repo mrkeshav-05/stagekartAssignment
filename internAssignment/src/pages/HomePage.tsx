@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import AddEquipmentForm from "./Page01";
 import "../App.css";
 import { useInventory } from "../context/InventoryContext";
-
+import { PiSoundcloudLogo } from "react-icons/pi";
+import { IoMicOutline } from "react-icons/io5";
 const EquipmentItem = ({
   id,
   onAddClick,
@@ -87,7 +88,9 @@ const LocalAddEquipmentForm = ({  }: { onClose: () => void }) => {
     }));
   };
   return (
-    <div>
+
+
+    <div className="font-serif">
       <div className=" p-6  rounded-lg w-full max-w-lg">
         {/* Save & Exit Button */}
         <div className="flex justify-end">
@@ -99,7 +102,7 @@ const LocalAddEquipmentForm = ({  }: { onClose: () => void }) => {
           </button>
         </div>
         {/* Heading */}
-        <h1 className="text-2xl font-light mt-4">Add equipment</h1>
+        <h1 className="text-2xl font-light mt-4 ">Add equipment</h1>
         <p className="text-gray-600 mt-1">
           Add equipment items in the template for your selected package series.
         </p>
@@ -114,8 +117,10 @@ const LocalAddEquipmentForm = ({  }: { onClose: () => void }) => {
         <p className="text-sm text-gray-500 mb-4">
           Equipment items included in this package.
         </p>
-        <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-block mb-2">
-          🏗️ Sound
+        <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-flex mb-2">
+          <PiSoundcloudLogo className=" mr-2 mt-1 font-semibold"
+          />
+          Sound
         </div>
         <div className="mb-4">
           <div className="font-medium py-1 px-2 rounded-md inline-block mb-2">
@@ -152,8 +157,10 @@ const LocalAddEquipmentForm = ({  }: { onClose: () => void }) => {
             setCount={(count) => updateQuantity("Audio Mixer", count)}
             onAddClick={() => setShowFooter(false)}
           />
-        <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-block my-4">
-          🏗️ Structure
+        <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-flex my-4">
+        <IoMicOutline className=" mr-2 mt-1 font-semibold"
+        />
+        Structure
         </div>
         {/* <div className="mb-4">
           <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
@@ -201,7 +208,8 @@ const LocalAddEquipmentForm = ({  }: { onClose: () => void }) => {
         `}
         >
           <button
-            className="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition"
+            // className="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition"
+            className=" text-blue-500  px-6 py-2 rounded-md  transition underline underline-offset-2"
             onClick={() => navigate(-1)}
           >
             Back
@@ -217,6 +225,8 @@ const LocalAddEquipmentForm = ({  }: { onClose: () => void }) => {
         </div>
       }
     </div>
+
+
   );
 };
 

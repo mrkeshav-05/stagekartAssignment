@@ -4,6 +4,8 @@ import { useCart } from "../context/CartContext";
 import { audio1, image2, image3, micro1, micro3, speaker1, speaker2, speaker3 } from "../assets/images";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
+import { PiSoundcloudLogo } from "react-icons/pi";
+
 const CartPage: React.FC = () => {
   const { cart, removeFromCart } = useCart();
   const navigate = useNavigate();
@@ -14,12 +16,12 @@ const CartPage: React.FC = () => {
     return images[randomIndex];
   };
   return (
-    <div>
+    <div className="font-sarif">
       <div className=" p-6  rounded-lg w-full max-w-lg">
         {/* Save & Exit Button */}
-        <div className="flex justify-end">
+        <div className="flex justify-end ">
           <button
-            className="border border-gray-300 px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100 transition"
+            className="border border-gray-300 px-4 py-2 rounded-md text-gray-700 font-serif hover:bg-gray-100 transition"
             onClick={() => navigate("/cart")}
           >
             Save & exit
@@ -27,24 +29,25 @@ const CartPage: React.FC = () => {
         </div>
 
         {/* Heading */}
-        <h1 className="text-2xl font-light mt-4">Add equipment</h1>
-        <p className="text-gray-600 mt-1">
+        <h1 className="text-2xl font-light mt-4 font-serif">Add equipment</h1>
+        <p className="text-gray-600 mt-1 font-serif">
           Add equipment items in the template for your selected package series.
         </p>
 
         {/* Preview Package Link */}
-        <a href="/" className="text-blue-600 mt-4 inline-block hover:underline">
+        <a href="/" className="text-blue-600 font-serif mt-4 inline-block hover:underline">
           Preview Package
         </a>
       </div>
     
-    <div className="max-w-sm mx-3 mb-40 bg-white rounded-2xl shadow-2xl shadow-slate-300  p-4">
-      <h2 className="text-2xl font-semibold  mb-4">Equipment</h2>
+    <div className="max-w-sm mx-3 mb-40 bg-white rounded-2xl shadow-2xl shadow-slate-300  p-4 font-serif">
+      <h2 className="text-xl font-semibold  mb-4">Equipment</h2>
       <p className="text-sm text-gray-500 mb-4">
           Equipment items included in this package.
         </p>
-        <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-block mb-2">
-          🏗️ Sound
+        <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-flex mb-2">
+          <PiSoundcloudLogo className=" mr-2 mt-1 font-semibold" />
+        Sound
         </div>
       {cart.length === 0 ? (
         <p className="text-center text-gray-600">Your cart is empty.</p>
@@ -94,7 +97,8 @@ const CartPage: React.FC = () => {
         className="fixed bottom-0 left-0 w-full border flex justify-between p-4 bg-white border-t border-gray-300 shadow-md"
         >
           <button
-            className="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition"
+            // className="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition"
+            className=" text-blue-500  px-6 py-2 rounded-md  transition underline underline-offset-2 font-sarif"
             onClick={() => navigate(-1)}
           >
             Back
