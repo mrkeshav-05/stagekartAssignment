@@ -1,15 +1,11 @@
-import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AddEquipmentForm from "./Page01";
-import { motion } from "framer-motion";
 import "../App.css";
 import { useInventory } from "../context/InventoryContext";
 
 const EquipmentItem = ({
   id,
-  name,
-  count,
-  setCount,
   onAddClick,
 }: {
   id: number;
@@ -60,9 +56,8 @@ const EquipmentItem = ({
   );
 };
 
-const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
+const LocalAddEquipmentForm = ({  }: { onClose: () => void }) => {
   const navigate = useNavigate();
-  const { equipment } = useInventory();
   const [equipmentQuantities, setEquipmentQuantities] = useState<{
     [key: string]: number;
   }>({
@@ -72,12 +67,12 @@ const LocalAddEquipmentForm = ({ onClose }: { onClose: () => void }) => {
     "Fixed Fixture": 0,
   });
   const [customItemCount, setCustomItemCount] = useState(0);
-  const [isSliderActive, setIsSliderActive] = useState(false);
+  const [isSliderActive, ] = useState(false);
 
-  const [showFooter, setShowFooter] = useState(true);
-  const handleSliderChange = (value: number) => {
-    setIsSliderActive(value > 0); // Assume active if value is greater than 0
-  };
+  const [, setShowFooter] = useState(true);
+  // const handleSliderChange = (value: number) => {
+  //   setIsSliderActive(value > 0); // Assume active if value is greater than 0
+  // };
   const handleAddMore = () => {
     setCustomItemCount((prev) => prev + 1);
     const newNumber = (customItemCount + 1).toString().padStart(2, "0");

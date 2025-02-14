@@ -1,5 +1,4 @@
 import React from "react";
-import { IoTrash } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { audio1, image2, image3, micro1, micro3, speaker1, speaker2, speaker3 } from "../assets/images";

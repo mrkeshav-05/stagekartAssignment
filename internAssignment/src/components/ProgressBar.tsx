@@ -20,8 +20,8 @@ const ProgressBar = () => {
     <div className="fixed top-1 left-0 w-full h-2 bg-gray-200">
       <div
         className="h-full bg-blue-500 transition-all duration-500 ease-in-out"
-        style={{ width: `${progress}%` }}
-      ></div>
+        style={{ width: `${progress}%` }}>
+      </div>
     </div>
   );
 };

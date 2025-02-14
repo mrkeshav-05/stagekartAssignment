@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Page01 from './pages/Page01'
 import { CartProvider } from './context/CartContext'
 import CartPage from './pages/Cart'
-import ProgressBar from './components/progressbar'
+import ProgressBar from './components/ProgressBar'
 function App() {
   return (
     <>

@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { IoClose } from "react-icons/io5"; // Close icon
 import "../App.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { uploadImageToCloudinary } from "../utils/cloudinaryService";
-import { useInventory } from "../context/InventoryContext";
+// import { useInventory } from "../context/InventoryContext";
 interface AddEquipmentFormProps {
   onClose: () => void;
   equipmentId: number;
@@ -14,13 +13,13 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
   onClose,
   equipmentId,
 }) => {
-  const { equipment, updateQuantity } = useInventory();
-  const item = equipment.find((eq) => eq.id === equipmentId) || {
-    id: equipmentId,
-    quantity: 1,
-  };
+  // const { equipment } = useInventory();
+  // const item = equipment.find((eq) => eq.id === equipmentId) || {
+  //   id: equipmentId,
+  //   quantity: 1,
+  // };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   // const { quantity, setQuantity } = useInventory();
@@ -32,7 +31,7 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
   const [model, setModel] = useState("");
   const [power, setPower] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const [assembled, setAssembled] = useState(false);
+  const [assembled, ] = useState(false);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setImage(e.target.files[0]);
