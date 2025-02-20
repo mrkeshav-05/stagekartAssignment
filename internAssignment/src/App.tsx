@@ -10,9 +10,8 @@ function App() {
     <>
     <CartProvider>
       <Router>
-        <div className=''>
-      <ProgressBar />
-        </div>
+          <ProgressBar />
+          {/* <h1 className=" text-xl">Hello, Inter Font!</h1> */}
       <Routes>
         <Route path="/" element={<HomePage onClose={() => { /* handle close */ }} />} />
         <Route path="/" element={<Page01 onClose={() => { /* handle close */ }} equipmentId={1} />} />

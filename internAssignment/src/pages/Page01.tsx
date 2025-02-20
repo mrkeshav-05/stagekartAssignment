@@ -93,6 +93,7 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
               <div>
                 <label className="block text-sm font-extralight text-slate-700">Section</label>
                 <select
+                  title="Select Section"
                   className="w-full border-1 border-slate-300 rounded-md p-2 text-sm font-extralight text-slate-700"
                   value={section}
                   onChange={(e) => setSection(e.target.value)}
@@ -104,6 +105,7 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
               <div>
                 <label className="block text-sm font-extralight text-slate-700">Type</label>
                 <select
+                  title="Select Type"
                   className="w-full border-1 border-slate-300 rounded-md p-2 text-sm font-extralight text-slate-700"
                   value={type}
                   onChange={(e) => setType(e.target.value)}
@@ -167,7 +169,7 @@ const AddEquipmentForm: React.FC<AddEquipmentFormProps> = ({
                 <label className="block text-sm font-extralight text-slate-700">
                   Size (Woofer inches)
                 </label>
-                <select className="w-full border-1 border-slate-300 rounded-md p-2 text-sm font-extralight text-slate-700">
+                <select title="Select Size" className="w-full border-1 border-slate-300 rounded-md p-2 text-sm font-extralight text-slate-700">
                   <option>Select</option>
                 </select>
               </div>
