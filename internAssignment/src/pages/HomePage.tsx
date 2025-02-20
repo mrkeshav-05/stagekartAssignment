@@ -95,89 +95,91 @@ const LocalAddEquipmentForm = ({}: { onClose: () => void }) => {
   return (
     <div className="font-inter">
       <div className=" mx-6">
-      <div className="pt-6 pb-3 rounded-lg w-full max-w-lg">
-        {/* Save & Exit Button */}
-        <div className="flex justify-end mb-1">
-          <button
-            className="border border-gray-300 w-[116px] h-auto min-w-[116px] min-h-[48px] rounded-sm p-1 gap-2"
-            onClick={() => navigate("/cart")}
-          >
-            Save & exit
-          </button>
-        </div>
-        {/* Heading */}
-        <p className="w-[342px] h-[40px] font-inter font-medium  text-[32px] leading-[40px] tracking-[-0.03em] text-[#0F161E]">
-          Add Equipment
-        </p>
-        <p className="w-[342px] h-[40px] font-inter font-light text-[16px] leading-[20px] -tracking-normal text-[#5A5F66]">
-          Add equipment items in the template for your selected package series.
-        </p>
-
-        {/* Preview Package Link */}
-        <div className="flex justify-end ">
-          <a
-            href="/"
-            className="text-blue-600  mt-6 text-[14px] inline-block underline underline-offset-2 font-inter leading-[20px] tracking-wide"
-          >
-            Preview Package
-          </a>
-        </div>
-      </div>
-      {/*  */}
-      <div className=" max-w-sm  mb-40 bg-white rounded-2xl shadow-2xl shadow-slate-300 px-3 py-1.5 ">
-        <div className="flex-col space-y-2 my-1.5">
-          <h2 className=" font-medium text-2xl font-inter leading-[20px] tracking-wide">
-            Equipment
-          </h2>
-          <p className="text-sm text-gray-500 font-inter leading-[20px] tracking-normal ">
-            Equipment items included in this package.
+        <div className="pt-6 pb-3 rounded-lg w-full max-w-lg">
+          {/* Save & Exit Button */}
+          <div className="flex justify-end mb-1">
+            <button
+              className="border border-gray-300 w-[116px] h-auto min-w-[116px] min-h-[48px] rounded-sm p-1 gap-2"
+              onClick={() => navigate("/cart")}
+            >
+              Save & exit
+            </button>
+          </div>
+          {/* Heading */}
+          <p className="w-[342px] h-[40px] font-inter font-medium  text-[32px] leading-[40px] tracking-[-0.03em] text-[#0F161E]">
+            Add Equipment
           </p>
+          <div className="">
+            <p className=" font-inter font-light text-[16px] leading-[20px] -tracking-normal text-[#5A5F66]">
+              Add equipment items in the template for your selected package
+              series.
+            </p>
+          </div>
+          {/* Preview Package Link */}
+          <div className="flex justify-end ">
+            <a
+              href="/"
+              className="text-blue-600  mt-6 text-[14px] inline-block underline underline-offset-2 font-inter leading-[20px] tracking-wide"
+            >
+              Preview Package
+            </a>
+          </div>
         </div>
+        {/*  */}
+        <div className=" max-w-sm  mb-40 bg-white rounded-2xl shadow-2xl shadow-slate-300 px-3 py-1.5 ">
+          <div className="flex-col space-y-2 my-1.5">
+            <h2 className=" font-medium text-2xl font-inter leading-[20px] tracking-wide">
+              Equipment
+            </h2>
+            <p className="text-sm text-gray-500 font-inter leading-[20px] tracking-normal ">
+              Equipment items included in this package.
+            </p>
+          </div>
 
-        <div className="bg-blue-100 w-full mt-3 text-blue-600 font-medium py-1 px-2 rounded-md inline-flex mb-8">
-          <PiSoundcloudLogo className=" mr-2 mt-1 font-semibold" />
-          Sound
-        </div>
-        <div className="mb-4">
-          <div className="font-medium py-1 px-2 rounded-md inline-block ">
-            Speaker
+          <div className="bg-blue-100 w-full mt-3 text-blue-600 font-medium py-1 px-2 rounded-md inline-flex mb-8">
+            <PiSoundcloudLogo className=" mr-2 mt-1 font-semibold" />
+            Sound
           </div>
-          <EquipmentItem
-            id={1}
-            name="Speaker"
-            count={equipmentQuantities["Speaker"]}
-            setCount={(count) => updateQuantity("Speaker", count)}
-            onAddClick={() => setShowFooter(false)}
-          />
-        </div>
-        <div className="mb-4">
-          <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
-            Microphone
+          <div className="mb-4">
+            <div className="font-medium py-1 px-2 rounded-md inline-block ">
+              Speaker
+            </div>
+            <EquipmentItem
+              id={1}
+              name="Speaker"
+              count={equipmentQuantities["Speaker"]}
+              setCount={(count) => updateQuantity("Speaker", count)}
+              onAddClick={() => setShowFooter(false)}
+            />
           </div>
-          <EquipmentItem
-            id={2}
-            name="Microphone"
-            count={equipmentQuantities["Microphone"]}
-            setCount={(count) => updateQuantity("Microphone", count)}
-            onAddClick={() => setShowFooter(false)}
-          />
-        </div>
-        <div className="mb-4">
-          <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
-            Audio Mixer
+          <div className="mb-4">
+            <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
+              Microphone
+            </div>
+            <EquipmentItem
+              id={2}
+              name="Microphone"
+              count={equipmentQuantities["Microphone"]}
+              setCount={(count) => updateQuantity("Microphone", count)}
+              onAddClick={() => setShowFooter(false)}
+            />
           </div>
-          <EquipmentItem
-            id={3}
-            name="Audio Mixer"
-            count={equipmentQuantities["Audio Mixer"]}
-            setCount={(count) => updateQuantity("Audio Mixer", count)}
-            onAddClick={() => setShowFooter(false)}
-          />
-          <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-flex my-4">
-            <IoMicOutline className=" mr-2 mt-1 font-semibold" />
-            Structure
-          </div>
-          {/* <div className="mb-4">
+          <div className="mb-4">
+            <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
+              Audio Mixer
+            </div>
+            <EquipmentItem
+              id={3}
+              name="Audio Mixer"
+              count={equipmentQuantities["Audio Mixer"]}
+              setCount={(count) => updateQuantity("Audio Mixer", count)}
+              onAddClick={() => setShowFooter(false)}
+            />
+            <div className="bg-blue-100 w-full text-blue-600 font-medium py-1 px-2 rounded-md inline-flex my-4">
+              <IoMicOutline className=" mr-2 mt-1 font-semibold" />
+              Structure
+            </div>
+            {/* <div className="mb-4">
           <div className=" font-medium py-1 px-2 rounded-md inline-block mb-2">
             Fixed Fixture
           </div>
@@ -189,29 +191,33 @@ const LocalAddEquipmentForm = ({}: { onClose: () => void }) => {
 
           />
         </div> */}
-          <div className="mb-4">
-            {Object.entries(equipmentQuantities).map(([itemName, quantity]) => (
-              <div key={itemName} className="mb-4">
-                <EquipmentItem
-                  id={Object.keys(equipmentQuantities).indexOf(itemName) + 1}
-                  name={itemName}
-                  count={quantity}
-                  setCount={(count) => updateQuantity(itemName, count)}
-                  onAddClick={() => setShowFooter(false)}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="justify-center flex align-middle my-4 py-8">
-            <button
-              className="w-[60%]  bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-              onClick={handleAddMore}
-            >
-              + Add more
-            </button>
+            <div className="mb-4">
+              {Object.entries(equipmentQuantities).map(
+                ([itemName, quantity]) => (
+                  <div key={itemName} className="mb-4">
+                    <EquipmentItem
+                      id={
+                        Object.keys(equipmentQuantities).indexOf(itemName) + 1
+                      }
+                      name={itemName}
+                      count={quantity}
+                      setCount={(count) => updateQuantity(itemName, count)}
+                      onAddClick={() => setShowFooter(false)}
+                    />
+                  </div>
+                )
+              )}
+            </div>
+            <div className="justify-center flex align-middle my-4 py-8">
+              <button
+                className="w-[60%]  bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                onClick={handleAddMore}
+              >
+                + Add more
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       </div>
 
       {/* Conditionally render the footer */}
